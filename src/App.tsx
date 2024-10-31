@@ -4,6 +4,7 @@ import { WordPicker } from './components/WordPicker';
 import { CardRecovery } from './components/CardRecovery';
 import { generateCards, checkWin, type BingoCard } from './utils/bingo';
 import { ListPlus, Loader2, RefreshCw, Ghost, Skull, Candy, Cat, Moon } from 'lucide-react';
+import Modal from './components/Modal';
 
 const HalloweenBackground = () => {
   const icons = [Ghost, Skull, Candy, Cat, Moon];
@@ -34,6 +35,9 @@ function App() {
   const [wordList, setWordList] = useState<string[]>([]);
   const [cards, setCards] = useState<BingoCard[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const gifUrl = 'https://media.giphy.com/media/l3vRfhFD8hJCiP0uQ/giphy.gif?cid=790b7611h3m5roulg3v76k06jmkxv5tdi3tfi8b74dtiyp8d&ep=v1_gifs_search&rid=giphy.gif&ct=g';
+
 
   const handleAddWords = () => {
     const words = wordInput
@@ -68,7 +72,7 @@ function App() {
     setCards(newCards);
 
     if (checkWin(newCards[cardIndex].checked)) {
-      alert('BINGO! You won on card ' + (cardIndex + 1));
+      setIsModalOpen(true);
     }
   };
 
@@ -78,14 +82,19 @@ function App() {
     }
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-transparent relative">
       <HalloweenBackground />
+      <Modal isOpen={true} onClose={handleCloseModal} gifUrl={gifUrl} />
       <div className="container mx-auto px-4 py-8 relative z-10">
         <h1 className="text-5xl font-bold text-center mb-8 text-orange-500 font-serif tracking-wider">
-          🎃 Spooky Word Bingo 🎃
+          🎃 Spooky Bingo 🎃
+          Prise de rendez-vous 
         </h1>
-
         <div className="max-w-2xl mx-auto space-y-6 mb-8">
           <div className="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg shadow-orange-500/20 p-6 border border-orange-500/20">
             <h2 className="text-xl font-semibold mb-4 text-orange-400">Add Words</h2>
