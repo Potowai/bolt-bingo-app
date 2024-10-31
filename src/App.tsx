@@ -35,7 +35,7 @@ function App() {
   const [wordList, setWordList] = useState<string[]>([]);
   const [cards, setCards] = useState<BingoCard[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const gifUrl = 'https://media.giphy.com/media/l3vRfhFD8hJCiP0uQ/giphy.gif?cid=790b7611h3m5roulg3v76k06jmkxv5tdi3tfi8b74dtiyp8d&ep=v1_gifs_search&rid=giphy.gif&ct=g';
 
 
