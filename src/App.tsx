@@ -89,7 +89,7 @@ function App() {
   return (
     <div className="min-h-screen bg-transparent relative">
       <HalloweenBackground />
-      <Modal isOpen={true} onClose={handleCloseModal} gifUrl={gifUrl} />
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} gifUrl={gifUrl} />
       <div className="container mx-auto px-4 py-8 relative z-10">
         <h1 className="text-5xl font-bold text-center mb-8 text-orange-500 font-serif tracking-wider">
           🎃 Spooky Bingo 🎃
