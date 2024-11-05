@@ -1,36 +1,39 @@
-import React, { useState } from 'react';
-import { Search, Loader2 } from 'lucide-react';
-import { recoverCard, type BingoCard } from '../utils/bingo';
+import React, { useState } from "react";
+import { Search, Loader2 } from "lucide-react";
+import { recoverCard, type BingoCard } from "../utils/bingo";
 
 interface CardRecoveryProps {
   wordList: string[];
   onCardRecovered: (card: BingoCard) => void;
 }
 
-export const CardRecovery: React.FC<CardRecoveryProps> = ({ wordList, onCardRecovered }) => {
-  const [cardId, setCardId] = useState('');
+export const CardRecovery: React.FC<CardRecoveryProps> = ({
+  wordList,
+  onCardRecovered,
+}) => {
+  const [cardId, setCardId] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleRecover = async () => {
     if (!cardId.trim()) {
-      setError('Please enter a card ID');
+      setError("Please enter a card ID");
       return;
     }
 
     setIsSearching(true);
-    setError('');
+    setError("");
 
     try {
       const card = await recoverCard(cardId, wordList);
       if (card) {
         onCardRecovered(card);
-        setCardId('');
+        setCardId("");
       } else {
-        setError('Card not found');
+        setError("Card not found");
       }
-    } catch (err) {
-      setError('Failed to recover card');
+    } catch {
+      setError("Failed to recover card");
     } finally {
       setIsSearching(false);
     }
@@ -38,7 +41,9 @@ export const CardRecovery: React.FC<CardRecoveryProps> = ({ wordList, onCardReco
 
   return (
     <div className="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg shadow-orange-500/20 p-6 border border-orange-500/20">
-      <h2 className="text-xl font-semibold mb-4 text-orange-400">Recover Card</h2>
+      <h2 className="text-xl font-semibold mb-4 text-orange-400">
+        Recover Card
+      </h2>
       <div className="flex gap-4">
         <input
           type="text"

@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { BingoCardComponent } from './components/BingoCard';
-import { WordPicker } from './components/WordPicker';
-import { CardRecovery } from './components/CardRecovery';
-import { generateCards, checkWin, type BingoCard } from './utils/bingo';
-import { ListPlus, Loader2, RefreshCw, Ghost, Skull, Candy, Cat, Moon } from 'lucide-react';
-import Modal from './components/Modal';
+import { useState } from "react";
+import { BingoCardComponent } from "./components/BingoCard";
+import { WordPicker } from "./components/WordPicker";
+import { CardRecovery } from "./components/CardRecovery";
+import { generateCards, checkWin, type BingoCard } from "./utils/bingo";
+import {
+  ListPlus,
+  Loader2,
+  RefreshCw,
+  Ghost,
+  Skull,
+  Candy,
+  Cat,
+  Moon,
+} from "lucide-react";
+import Modal from "./components/Modal";
 
 const HalloweenBackground = () => {
   const icons = [Ghost, Skull, Candy, Cat, Moon];
   return (
     <>
-      {icons.map((Icon, index) => (
+      {icons.map((Icon, index) =>
         Array.from({ length: 3 }).map((_, i) => (
           <Icon
             key={`${index}-${i}`}
@@ -21,31 +30,31 @@ const HalloweenBackground = () => {
               width: `${Math.random() * 40 + 20}px`,
               height: `${Math.random() * 40 + 20}px`,
               animationDelay: `${Math.random() * 2}s`,
-              zIndex: -1
+              zIndex: -1,
             }}
           />
-        ))
-      ))}
+        )),
+      )}
     </>
   );
 };
 
 function App() {
-  const [wordInput, setWordInput] = useState('');
+  const [wordInput, setWordInput] = useState("");
   const [wordList, setWordList] = useState<string[]>([]);
   const [cards, setCards] = useState<BingoCard[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const gifUrl = 'https://media.giphy.com/media/l3vRfhFD8hJCiP0uQ/giphy.gif?cid=790b7611h3m5roulg3v76k06jmkxv5tdi3tfi8b74dtiyp8d&ep=v1_gifs_search&rid=giphy.gif&ct=g';
-
+  const gifUrl =
+    "https://media.giphy.com/media/l3vRfhFD8hJCiP0uQ/giphy.gif?cid=790b7611h3m5roulg3v76k06jmkxv5tdi3tfi8b74dtiyp8d&ep=v1_gifs_search&rid=giphy.gif&ct=g";
 
   const handleAddWords = () => {
     const words = wordInput
-      .split('\n')
+      .split("\n")
       .map((word) => word.trim())
       .filter((word) => word.length > 0);
     setWordList([...new Set([...wordList, ...words])]);
-    setWordInput('');
+    setWordInput("");
   };
 
   const handleGenerateCards = async () => {
@@ -55,7 +64,7 @@ function App() {
       setCards(newCards);
     } catch (error) {
       alert(
-        error instanceof Error ? error.message : 'Failed to generate cards'
+        error instanceof Error ? error.message : "Failed to generate cards",
       );
     }
     setIsGenerating(false);
@@ -66,7 +75,7 @@ function App() {
     newCards[cardIndex] = {
       ...cards[cardIndex],
       checked: cards[cardIndex].checked.map((c, i) =>
-        i === wordIndex ? !c : c
+        i === wordIndex ? !c : c,
       ),
     };
     setCards(newCards);
@@ -93,11 +102,12 @@ function App() {
       <div className="container mx-auto px-4 py-8 relative z-10">
         <h1 className="text-5xl font-bold text-center mb-8 text-orange-500 font-serif tracking-wider">
           🎃 Spooky Bingo 🎃
-          Prise de rendez-vous 
         </h1>
         <div className="max-w-2xl mx-auto space-y-6 mb-8">
           <div className="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg shadow-orange-500/20 p-6 border border-orange-500/20">
-            <h2 className="text-xl font-semibold mb-4 text-orange-400">Add Words</h2>
+            <h2 className="text-xl font-semibold mb-4 text-orange-400">
+              Add Words
+            </h2>
             <textarea
               value={wordInput}
               onChange={(e) => setWordInput(e.target.value)}
@@ -136,25 +146,21 @@ function App() {
               onCardRecovered={handleCardRecovered}
             />
           )}
+
+          {wordList.length > 0 && <WordPicker wordList={wordList} />}
+
+          {cards.length > 0 && (
+            <div className="grid gap-8">
+              {cards.map((card, i) => (
+                <BingoCardComponent
+                  key={card.id}
+                  card={card}
+                  onToggle={(index) => handleToggleWord(i, index)}
+                />
+              ))}
+            </div>
+          )}
         </div>
-
-        {wordList.length > 0 && (
-          <div className="mb-8">
-            <WordPicker wordList={wordList} />
-          </div>
-        )}
-
-        {cards.length > 0 && (
-          <div className="grid gap-8">
-            {cards.map((card, i) => (
-              <BingoCardComponent
-                key={card.id}
-                card={card}
-                onToggle={(index) => handleToggleWord(i, index)}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

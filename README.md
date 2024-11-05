@@ -2,7 +2,7 @@
 
 [Edit in StackBlitz next generation editor ⚡️](https://stackblitz.com/~/github.com/Potowai/bolt-bingo-app)
 
-# Liste de mots 
+# Liste de mots
 
 Citrouille
 Fantôme

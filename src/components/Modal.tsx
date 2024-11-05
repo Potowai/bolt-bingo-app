@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, gifUrl }) => {
       {isOpen && (
         <div className="fixed z-50 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen">
-          <div className="bg-gray-900/80 backdrop-blur-xl rounded-xl shadow-lg shadow-orange-500/20 p-6 border border-orange-500/20 z-10">
+            <div className="bg-gray-900/80 backdrop-blur-xl rounded-xl shadow-lg shadow-orange-500/20 p-6 border border-orange-500/20 z-10">
               <div className="flex justify-end">
                 <button
                   className="text-gray-400 hover:text-gray-600 focus:outline-none mb-3"
@@ -34,9 +34,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, gifUrl }) => {
                 </button>
               </div>
               <div className="justify-center">
-                <span className='text-orange-500 text-xl font-semibold mb-3'>Vous avez gagné le bingo</span>
+                <span className="text-orange-500 text-xl font-semibold mb-3">
+                  Vous avez gagné le bingo
+                </span>
                 <div>
-                <img src={gifUrl} alt="GIF" className="max-w-full rounded" />
+                  <img src={gifUrl} alt="GIF" className="max-w-full rounded" />
                 </div>
               </div>
             </div>
