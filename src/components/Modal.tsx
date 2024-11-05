@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, gifUrl }) => {
       {isOpen && (
         <div className="fixed z-50 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen">
-            <div className="bg-gray-900/80 backdrop-blur-xl rounded-xl shadow-lg shadow-orange-500/20 p-6 border border-orange-500/20 z-10">
+            <div className="bg-gray-900/90 backdrop-blur-xl rounded-2xl shadow-2xl shadow-orange-500/30 p-8 border border-orange-500/30 z-10 transform transition-all duration-300 scale-100 hover:scale-105">
               <div className="flex justify-end">
                 <button
                   className="text-gray-400 hover:text-gray-600 focus:outline-none mb-3"
@@ -33,12 +33,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, gifUrl }) => {
                   </svg>
                 </button>
               </div>
-              <div className="justify-center">
-                <span className="text-orange-500 text-xl font-semibold mb-3">
-                  Vous avez gagné le bingo
+              <div className="flex flex-col items-center text-center space-y-4">
+                <span className="text-4xl font-bold text-orange-500 font-serif">
+                  Vous avez gagné le bingo!
                 </span>
-                <div>
-                  <img src={gifUrl} alt="GIF" className="max-w-full rounded" />
+                <div className="flex justify-center">
+                  <img src={gifUrl} alt="GIF" className="max-w-full rounded-lg border-4 border-orange-500/30" />
                 </div>
               </div>
             </div>
